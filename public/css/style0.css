@@ -572,7 +572,7 @@ button {
 /** about section **/
 
 .about {
-     background: #353e4e;
+     background: #19B83B;
      margin-top: 60px;
      padding: 90px 0;
 }
@@ -793,7 +793,7 @@ button {
 
 .footer {
      margin-top: 265px;
-     background: #242423;
+     background: white;
      padding-top: 85px;
      text-align: center;
 }
@@ -804,7 +804,7 @@ button {
 }
 
 .footer .titlepage h2 {
-     color: #fff;
+     color: black;
 }
 
 .cont {
