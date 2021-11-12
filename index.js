@@ -4,6 +4,13 @@ let app = express();
 const exphbs  = require('express-handlebars');
 const bodyParser = require('body-parser');
 
+
+// import sqlite modules
+const sqlite3 = require('sqlite3');
+const { open } = require('sqlite');
+
+
+
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
@@ -15,10 +22,31 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 
-app.get('/', function(req, res){
+open({
+	filename: './login.db',
+	driver: sqlite3.Database
+}).then(async function (db) {
+
+	// run migrations
+
+	await db.migrate();
+
+	// only setup the routes once the database connection has been established
+  app.get('/', function(req, res){
+    db
+    .all('select * from login')
+    .then (function(login){
+      console.log(login)
+    })
     res.render('index');
 
 });
+
+})
+
+
+
+
 let PORT = process.env.PORT || 3007;
 
 app.listen(PORT, function(){
